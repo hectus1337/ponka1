@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VALOR & VORTEX | Champion-Grade BJJ Kimonos</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#E5A93C',
+                        'gold-light': '#FCD34D',
+                        magenta: '#E11D48',
+                        'dark-bg': '#09090B',
+                        'card-bg': '#121215',
+                        'border-glow': '#27272A'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for combat icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #09090B;
+            color: #F4F4F5;
+            overflow-x: hidden;
+        }
+
+        .glow-gold {
+            box-shadow: 0 0 25px rgba(229, 169, 60, 0.25);
+        }
+        .text-glow {
+            text-shadow: 0 0 15px rgba(229, 169, 60, 0.5);
+        }
+
+        .bg-grid {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        .glass-panel {
+            background: rgba(18, 18, 21, 0.88);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-dark-bg text-gray-100 antialiased selection:bg-gold selection:text-black">
+
+    <!-- LANGUAGE SELECTION LANDING MODAL (PRE-LOADER) -->
+    <div id="language-modal" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 transition-opacity duration-500">
+        <div class="glass-panel w-full max-w-xl rounded-3xl p-8 sm:p-12 border border-gold/30 glow-gold text-center relative overflow-hidden">
+            <div class="w-16 h-16 bg-gradient-to-br from-gold to-yellow-600 rounded-2xl flex items-center justify-center font-black text-black text-3xl shadow-lg mx-auto mb-6 transform -rotate-6">
+                V
+            </div>
+
+            <span class="inline-block text-xs font-black tracking-widest uppercase text-gold bg-gold/10 px-4 py-1.5 rounded-full border border-gold/30 mb-4">
+                Valor & Vortex BJJ
+            </span>
+
+            <h1 class="text-3xl sm:text-4xl font-black uppercase tracking-tight text-white mb-2">
+                Select Your Language / Изберете език
+            </h1>
+            <p class="text-gray-400 text-sm mb-8 font-light">
+                Created by active BJJ Champions for daily high-performance mat dominance.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- English Option -->
+                <button onclick="setLanguage('en')" class="group p-5 rounded-2xl border border-white/10 bg-white/5 hover:border-gold hover:bg-gold/10 transition-all duration-300 text-left flex items-center justify-between">
+                    <div>
+                        <div class="text-lg font-black text-white group-hover:text-gold uppercase">English</div>
+                        <div class="text-xs text-gray-400">View in English</div>
+                    </div>
+                    <span class="text-2xl">🇬🇧</span>
+                </button>
+
+                <!-- Bulgarian Option -->
+                <button onclick="setLanguage('bg')" class="group p-5 rounded-2xl border border-white/10 bg-white/5 hover:border-gold hover:bg-gold/10 transition-all duration-300 text-left flex items-center justify-between">
+                    <div>
+                        <div class="text-lg font-black text-white group-hover:text-gold uppercase">Български</div>
+                        <div class="text-xs text-gray-400">Преглед на Български</div>
+                    </div>
+                    <span class="text-2xl">🇧🇬</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION HEADER -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 bg-gradient-to-br from-gold to-yellow-600 rounded-lg flex items-center justify-center font-black text-black text-xl shadow-lg transform group-hover:rotate-12 transition-transform">
+                        V
+                    </div>
+                    <span class="text-xl sm:text-2xl font-black tracking-widest uppercase text-white">
+                        VALOR<span class="text-gold">&</span>VORTEX
+                    </span>
+                </a>
+
+                <!-- Nav Links -->
+                <nav class="hidden md:flex items-center space-x-8 text-xs font-bold tracking-widest uppercase">
+                    <a href="#hero" data-i18n="nav_home" class="hover:text-gold transition-colors">Home</a>
+                    <a href="#models" data-i18n="nav_gis" class="hover:text-gold transition-colors">The Kimonos</a>
+                    <a href="#tech" data-i18n="nav_craft" class="hover:text-gold transition-colors">Craftsmanship</a>
+                    <a href="#sales" data-i18n="nav_contact" class="hover:text-gold transition-colors">Sales Hotline</a>
+                </nav>
+
+                <!-- Language Toggle Dropdown / Button -->
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleLanguage()" class="px-3 py-1.5 rounded-lg border border-white/20 bg-white/5 hover:border-gold text-xs font-bold uppercase tracking-wider text-gold transition-colors flex items-center gap-2">
+                        <i class="fa-solid fa-globe"></i>
+                        <span id="current-lang-code">EN</span>
+                    </button>
+
+                    <a href="#sales" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-black tracking-widest uppercase bg-gradient-to-r from-gold to-yellow-600 text-black hover:from-yellow-400 hover:to-gold transition-all duration-300 transform hover:scale-105 shadow-md">
+                        <i class="fa-solid fa-phone"></i> <span data-i18n="btn_order_now">Order Now</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative min-h-screen pt-28 pb-16 flex items-center justify-center bg-grid overflow-hidden">
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-gold/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <!-- Champion Founder Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold/50 bg-gold/10 text-gold text-xs font-bold uppercase tracking-widest mb-6 glow-gold">
+                <i class="fa-solid fa-trophy"></i> <span data-i18n="badge_champion">Created by BJJ Champions • Built for Intense Daily Training</span>
+            </div>
+
+            <!-- Main Heading -->
+            <h1 class="text-4xl sm:text-6xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-6">
+                <span data-i18n="hero_title_1">PRO-GRADE BJJ GEAR</span> <br class="hidden sm:inline"/>
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-gold via-yellow-300 to-amber-500 text-glow" data-i18n="hero_title_2">
+                    BY CHAMPIONS, FOR CHAMPIONS
+                </span>
+            </h1>
+
+            <p class="max-w-2xl mx-auto text-gray-400 text-base sm:text-lg mb-10 leading-relaxed font-light" data-i18n="hero_sub">
+                Designed and battle-tested by active Brazilian Jiu-Jitsu gold medalists. Built for heavy daily training sessions, maximum grip resistance, and long-lasting mat endurance.
+            </p>
+
+            <!-- Hero CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+                <a href="#models" class="w-full sm:w-auto px-8 py-4 rounded-xl font-black text-xs tracking-widest uppercase bg-gradient-to-r from-gold to-yellow-600 text-black hover:from-yellow-400 hover:to-gold shadow-lg glow-gold transition-all duration-300 transform hover:-translate-y-1" data-i18n="btn_view_models">
+                    View Available Models
+                </a>
+                <a href="#sales" class="w-full sm:w-auto px-8 py-4 rounded-xl font-black text-xs tracking-widest uppercase border border-white/20 bg-white/5 hover:bg-white/10 hover:border-gold/50 transition-all duration-300" data-i18n="btn_direct_hotline">
+                    Call Sales Representative
+                </a>
+            </div>
+
+            <!-- Key Quick Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mt-16 pt-8 border-t border-white/10">
+                <div class="text-center p-3">
+                    <span class="block text-3xl font-black text-gold">450 GSM</span>
+                    <span class="text-xs uppercase text-gray-400 tracking-wider font-semibold" data-i18n="stat_pearl">Pearl Weave Cotton</span>
+                </div>
+                <div class="text-center p-3">
+                    <span class="block text-3xl font-black text-gold" data-i18n="stat_triple">Triple</span>
+                    <span class="text-xs uppercase text-gray-400 tracking-wider font-semibold" data-i18n="stat_stitching">Reinforced Stitching</span>
+                </div>
+                <div class="text-center p-3">
+                    <span class="block text-3xl font-black text-gold" data-i18n="stat_preshrunk">Pre-Shrunk</span>
+                    <span class="text-xs uppercase text-gray-400 tracking-wider font-semibold" data-i18n="stat_fabric">Daily Training Fit</span>
+                </div>
+                <div class="text-center p-3">
+                    <span class="block text-3xl font-black text-gold">A0 - A4</span>
+                    <span class="text-xs uppercase text-gray-400 tracking-wider font-semibold" data-i18n="stat_sizes">Available Sizes</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCT MODELS SECTION -->
+    <section id="models" class="py-24 bg-dark-bg relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold text-gold tracking-widest uppercase mb-2" data-i18n="section_models_subtitle">Pro Training Lineup</h2>
+                <p class="text-4xl sm:text-5xl font-black uppercase tracking-tight" data-i18n="section_models_title">THE TWO CHAMPION MODELS</p>
+                <div class="w-20 h-1 bg-gradient-to-r from-gold to-yellow-600 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+                <!-- MODEL 1: APEX LA EDITION (BLUE) -->
+                <div class="glass-panel rounded-2xl overflow-hidden hover:border-gold/40 transition-all duration-500 flex flex-col justify-between group">
+                    <div class="p-6 sm:p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <span class="text-xs font-black tracking-widest uppercase text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/30" data-i18n="m1_tag">Royal Blue Edition</span>
+                                <h3 class="text-3xl font-black uppercase mt-3 tracking-wide text-white">APEX LA EDITION</h3>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-3xl font-black text-gold">$169</span>
+                                <span class="block text-xs text-gray-400" data-i18n="in_stock">In Stock / Available</span>
+                            </div>
+                        </div>
+
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed" data-i18n="m1_desc">
+                            Vibrant royal blue training gi with iconic typography and internal sublimation. Crafted with 450 GSM Pearl Weave jacket for heavy daily sparring.
+                        </p>
+
+                        <!-- Product Image Container -->
+                        <div class="relative bg-black/60 rounded-xl p-4 mb-6 border border-white/5 flex items-center justify-center min-h-[320px] overflow-hidden group">
+                            <img src="kimono-blue.png" alt="Apex LA Edition Blue BJJ Kimono" class="max-h-[300px] w-auto object-contain transform group-hover:scale-105 transition-transform duration-500">
+                        </div>
+
+                        <!-- Specs Matrix -->
+                        <div class="space-y-2 mb-6 text-xs border-t border-b border-white/10 py-4">
+                            <div class="flex justify-between"><span class="text-gray-400" data-i18n="spec_jacket">Jacket Fabric:</span> <span class="font-bold text-gray-200">450 GSM Pearl Weave</span></div>
+                            <div class="flex justify-between"><span class="text-gray-400" data-i18n="spec_pants">Pants Fabric:</span> <span class="font-bold text-gray-200">10oz Reinforced Cotton</span></div>
+                            <div class="flex justify-between"><span class="text-gray-400" data-i18n="spec_type">Gear Type:</span> <span class="font-bold text-gold" data-i18n="spec_type_val">Daily Training & Hard Sparring</span></div>
+                        </div>
+
+                        <!-- Available Sizes Options Matrix -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2" data-i18n="avail_sizes">Available Sizes in Stock:</label>
+                            <div class="grid grid-cols-5 gap-2 text-center text-xs font-bold">
+                                <div class="py-2 bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 rounded-lg">A0</div>
+                                <div class="py-2 bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 rounded-lg">A1</div>
+                                <div class="py-2 bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 rounded-lg">A2</div>
+                                <div class="py-2 bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 rounded-lg">A3</div>
+                                <div class="py-2 bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 rounded-lg">A4</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="px-6 sm:px-8 pb-8 pt-2">
+                        <a href="#sales" class="w-full block text-center py-4 rounded-xl font-black text-xs tracking-widest uppercase bg-gold text-black hover:bg-gold-light shadow-lg transition-all transform hover:scale-[1.02]" data-i18n="btn_call_to_order_1">
+                            Call to Order Apex Model
+                        </a>
+                    </div>
+                </div>
+
+                <!-- MODEL 2: STEALTH ONYX (BLACK) -->
+                <div class="glass-panel rounded-2xl overflow-hidden hover:border-magenta/40 transition-all duration-500 flex flex-col justify-between group">
+                    <div class="p-6 sm:p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <span class="text-xs font-black tracking-widest uppercase text-magenta bg-magenta/10 px-3 py-1 rounded-full border border-magenta/30" data-i18n="m2_tag">Stealth Black Edition</span>
+                                <h3 class="text-3xl font-black uppercase mt-3 tracking-wide text-white">STEALTH ONYX</h3>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-3xl font-black text-gold">$159</span>
+                                <span class="block text-xs text-gray-400" data-i18n="in_stock">In Stock / Available</span>
+                            </div>
+                        </div>
+
+                        <p class="text-gray-400 text-sm mb-6 leading-relaxed" data-i18n="m2_desc">
+                            Sleek, minimalist all-black design with custom Moya shoulder crests. Built with zero-shrink pre-treated weave for everyday hard rolling.
+                        </p>
+
+                        <!-- Product Image Container -->
+                        <div class="relative bg-black/60 rounded-xl p-4 mb-6 border border-white/5 flex items-center justify-center min-h-[320px] overflow-hidden group">
+                            <img src="kimono-black.png" alt="Stealth Onyx Black BJJ Kimono" class="max-h-[300px] w-auto object-contain transform group-hover:scale-105 transition-transform duration-500">
+                        </div>
+
+                        <!-- Specs Matrix -->
+                        <div class="space-y-2 mb-6 text-xs border-t border-b border-white/10 py-4">
+                            <div class="flex justify-between"><span class="text-gray-400" data-i18n="spec_jacket">Jacket Fabric:</span> <span class="font-bold text-gray-200">450 GSM Micro Pearl</span></div>
+                            <div class="flex justify-between"><span class="text-gray-400" data-i18n="spec_pants">Pants Fabric:</span> <span class="font-bold text-gray-200">10oz Ripstop Canvas</span></div>
+                            <div class="flex justify-between"><span class="text-gray-400" data-i18n="spec_type">Gear Type:</span> <span class="font-bold text-magenta" data-i18n="spec_type_val2">Pro-Grade Training Armor</span></div>
+                        </div>
+
+                        <!-- Available Sizes Options Matrix -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-300 mb-2" data-i18n="avail_sizes">Available Sizes in Stock:</label>
+                            <div class="grid grid-cols-5 gap-2 text-center text-xs font-bold">
+                                <div class="py-2 bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 rounded-lg">A0</div>
+                                <div class="py-2 bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 rounded-lg">A1</div>
+                                <div class="py-2 bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 rounded-lg">A2</div>
+                                <div class="py-2 bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 rounded-lg">A3</div>
+                                <div class="py-2 bg-emerald-500/10 border border-emerald-500/40 text-emerald-400 rounded-lg">A4</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="px-6 sm:px-8 pb-8 pt-2">
+                        <a href="#sales" class="w-full block text-center py-4 rounded-xl font-black text-xs tracking-widest uppercase bg-magenta text-white hover:bg-rose-600 shadow-lg transition-all transform hover:scale-[1.02]" data-i18n="btn_call_to_order_2">
+                            Call to Order Onyx Model
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CRAFTSMANSHIP / CHAMPION FOUNDER HIGHLIGHT -->
+    <section id="tech" class="py-24 bg-black relative border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold text-gold tracking-widest uppercase mb-2" data-i18n="craft_subtitle">Tested in Championship Battle</h2>
+                <p class="text-4xl sm:text-5xl font-black uppercase tracking-tight" data-i18n="craft_title">DESIGNED BY CHAMPIONS</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-panel p-8 rounded-2xl border border-white/5 relative overflow-hidden">
+                    <div class="w-14 h-14 bg-gold/10 text-gold rounded-xl flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <h3 class="text-xl font-black uppercase mb-3 text-white" data-i18n="feat1_title">Champion Tested</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed" data-i18n="feat1_desc">
+                        Founded by active BJJ gold medalists who understand what holds up during 3-hour daily mat battles.
+                    </p>
+                </div>
+
+                <div class="glass-panel p-8 rounded-2xl border border-white/5 relative overflow-hidden">
+                    <div class="w-14 h-14 bg-gold/10 text-gold rounded-xl flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-xl font-black uppercase mb-3 text-white" data-i18n="feat2_title">Triple Reinforced</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed" data-i18n="feat2_desc">
+                        Heavy armpit, lapel, and side-slit reinforcements prevent fabric tearing under intense pressure passing.
+                    </p>
+                </div>
+
+                <div class="glass-panel p-8 rounded-2xl border border-white/5 relative overflow-hidden">
+                    <div class="w-14 h-14 bg-gold/10 text-gold rounded-xl flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-droplet-slash"></i>
+                    </div>
+                    <h3 class="text-xl font-black uppercase mb-3 text-white" data-i18n="feat3_title">EVA Foam Lapel</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed" data-i18n="feat3_desc">
+                        Quick-drying anti-bacterial EVA foam inside lapels that thwarts opponent grips and reduces sweat weight.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIRECT PHONE / SALES HOTLINE SECTION (NO EMAIL FORM) -->
+    <section id="sales" class="py-24 bg-dark-bg relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-panel rounded-3xl p-8 sm:p-12 border border-gold/40 glow-gold text-center">
+                <div class="w-16 h-16 bg-gold/10 text-gold rounded-2xl flex items-center justify-center text-3xl mx-auto mb-6 border border-gold/30">
+                    <i class="fa-solid fa-phone-volume"></i>
+                </div>
+
+                <h2 class="text-xs font-bold text-gold tracking-widest uppercase mb-2" data-i18n="sales_subtitle">Direct Sales & Ordering Line</h2>
+                <h3 class="text-3xl sm:text-5xl font-black uppercase tracking-tight text-white mb-4" data-i18n="sales_title">CALL US TO ORDER DIRECTLY</h3>
+                
+                <p class="text-gray-400 text-sm sm:text-base max-w-xl mx-auto mb-8 font-light" data-i18n="sales_desc">
+                    Speak directly with our inventory manager or founding team to check real-time size availability, request academy discounts, or place your order over the phone.
+                </p>
+
+                <!-- Dedicated Direct Phone Call Buttons -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-8">
+                    <a href="tel:+359888123456" class="p-6 rounded-2xl bg-black/60 border border-gold/40 hover:border-gold transition-all duration-300 group flex items-center justify-between text-left">
+                        <div>
+                            <span class="text-xs font-bold text-gold uppercase tracking-wider block" data-i18n="sales_line_1">Primary Sales Line</span>
+                            <span class="text-xl font-black text-white group-hover:text-gold transition-colors">+359 88 812 3456</span>
+                        </div>
+                        <i class="fa-solid fa-square-phone text-3xl text-gold group-hover:scale-110 transition-transform"></i>
+                    </a>
+
+                    <a href="tel:+359888654321" class="p-6 rounded-2xl bg-black/60 border border-white/20 hover:border-gold transition-all duration-300 group flex items-center justify-between text-left">
+                        <div>
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block" data-i18n="sales_line_2">Viber / WhatsApp Orders</span>
+                            <span class="text-xl font-black text-white group-hover:text-gold transition-colors">+359 88 865 4321</span>
+                        </div>
+                        <i class="fa-brands fa-whatsapp text-3xl text-emerald-400 group-hover:scale-110 transition-transform"></i>
+                    </a>
+                </div>
+
+                <div class="inline-flex items-center gap-2 text-xs text-gray-400 uppercase tracking-widest font-semibold bg-white/5 px-4 py-2 rounded-full border border-white/10">
+                    <i class="fa-regular fa-clock text-gold"></i> <span data-i18n="sales_hours">Mon - Sat: 09:00 - 19:00 (EET)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black border-t border-white/10 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-gold rounded-lg flex items-center justify-center font-black text-black text-lg">
+                    V
+                </div>
+                <span class="text-xl font-black tracking-widest uppercase text-white">VALOR & VORTEX</span>
+            </div>
+
+            <p class="text-xs text-gray-500 text-center" data-i18n="footer_copy">
+                &copy; 2026 VALOR & VORTEX BJJ Equipment Co. Created by BJJ Champions.
+            </p>
+
+            <div class="flex space-x-6 text-gray-400">
+                <a href="#" class="hover:text-gold transition-colors"><i class="fa-brands fa-instagram text-xl"></i></a>
+                <a href="#" class="hover:text-gold transition-colors"><i class="fa-brands fa-youtube text-xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- TRANSLATION & DICTIONARY LOGIC -->
+    <script>
+        const translations = {
+            en: {
+                nav_home: "Home",
+                nav_gis: "The Kimonos",
+                nav_craft: "Craftsmanship",
+                nav_contact: "Sales Hotline",
+                btn_order_now: "Order Now",
+                badge_champion: "Created by BJJ Champions • Built for Intense Daily Training",
+                hero_title_1: "PRO-GRADE BJJ GEAR",
+                hero_title_2: "BY CHAMPIONS, FOR CHAMPIONS",
+                hero_sub: "Designed and battle-tested by active Brazilian Jiu-Jitsu gold medalists. Built for heavy daily training sessions, maximum grip resistance, and long-lasting mat endurance.",
+                btn_view_models: "View Available Models",
+                btn_direct_hotline: "Call Sales Representative",
+                stat_pearl: "Pearl Weave Cotton",
+                stat_triple: "Triple",
+                stat_stitching: "Reinforced Stitching",
+                stat_preshrunk: "Pre-Shrunk",
+                stat_fabric: "Daily Training Fit",
+                stat_sizes: "Available Sizes",
+                section_models_subtitle: "Pro Training Lineup",
+                section_models_title: "THE TWO CHAMPION MODELS",
+                m1_tag: "Royal Blue Edition",
+                in_stock: "In Stock / Available",
+                m1_desc: "Vibrant royal blue training gi with iconic typography and internal sublimation. Crafted with 450 GSM Pearl Weave jacket for heavy daily sparring.",
+                spec_jacket: "Jacket Fabric:",
+                spec_pants: "Pants Fabric:",
+                spec_type: "Gear Type:",
+                spec_type_val: "Daily Training & Hard Sparring",
+                avail_sizes: "Available Sizes in Stock:",
+                btn_call_to_order_1: "Call to Order Apex Model",
+                m2_tag: "Stealth Black Edition",
+                m2_desc: "Sleek, minimalist all-black design with custom Moya shoulder crests. Built with zero-shrink pre-treated weave for everyday hard rolling.",
+                spec_type_val2: "Pro-Grade Training Armor",
+                btn_call_to_order_2: "Call to Order Onyx Model",
+                craft_subtitle: "Tested in Championship Battle",
+                craft_title: "DESIGNED BY CHAMPIONS",
+                feat1_title: "Champion Tested",
+                feat1_desc: "Founded by active BJJ gold medalists who understand what holds up during 3-hour daily mat battles.",
+                feat2_title: "Triple Reinforced",
+                feat2_desc: "Heavy armpit, lapel, and side-slit reinforcements prevent fabric tearing under intense pressure passing.",
+                feat3_title: "EVA Foam Lapel",
+                feat3_desc: "Quick-drying anti-bacterial EVA foam inside lapels that thwarts opponent grips and reduces sweat weight.",
+                sales_subtitle: "Direct Sales & Ordering Line",
+                sales_title: "CALL US TO ORDER DIRECTLY",
+                sales_desc: "Speak directly with our inventory manager or founding team to check real-time size availability, request academy discounts, or place your order over the phone.",
+                sales_line_1: "Primary Sales Line",
+                sales_line_2: "Viber / WhatsApp Orders",
+                sales_hours: "Mon - Sat: 09:00 - 19:00 (EET)",
+                footer_copy: "© 2026 VALOR & VORTEX BJJ Equipment Co. Created by BJJ Champions."
+            },
+            bg: {
+                nav_home: "Начало",
+                nav_gis: "Кимонота",
+                nav_craft: "Изработка",
+                nav_contact: "Телефон за Поръчки",
+                btn_order_now: "Поръчай Спешно",
+                badge_champion: "Създадено от BJJ Шампиони • За Тежки Тренировки",
+                hero_title_1: "ПРОФЕСИОНАЛНА BJJ ЕКИПИРОВКА",
+                hero_title_2: "ОТ ШАМПИОНИ, ЗА ШАМПИОНИ",
+                hero_sub: "Дизайна е тестван в битки от активни медалисти по Бразилско Жиу-Жицу. Създадени за интензивни ежедневни тренировки, максимална издръжливост и здрав хват.",
+                btn_view_models: "Виж Моделите",
+                btn_direct_hotline: "Обади се за Поръчка",
+                stat_pearl: "Pearl Weave Памук",
+                stat_triple: "Тройни",
+                stat_stitching: "Подсилени Шевове",
+                stat_preshrunk: "Предварително Свито",
+                stat_fabric: "За Всекидневни Тренировки",
+                stat_sizes: "Налични Размери",
+                section_models_subtitle: "Професионална Серия",
+                section_models_title: "ДВАТА ФЛАГМАНСКИ МОДЕЛА",
+                m1_tag: "Кралско Синьо Издание",
+                in_stock: "Налично / Бърза Доставка",
+                m1_desc: "Ярко синьо тренировъчно кимоно с легендарна типография. Изработено от 450 GSM Pearl Weave за тежки спаринги.",
+                spec_jacket: "Материя на Горнището:",
+                spec_pants: "Материя на Панталона:",
+                spec_type: "Тип Екипировка:",
+                spec_type_val: "За Интензивни Тренировки и Спаринг",
+                avail_sizes: "Налични Размери на Склад:",
+                btn_call_to_order_1: "Поръчай Модел Apex по Телефона",
+                m2_tag: "Черен Стелт Модел",
+                m2_desc: "Изчистен черен дизайн с бродирани Moya емблеми. Конструкция без свиване за брутална ежедневна употреба на татамито.",
+                spec_type_val2: "Професионална Тренировъчна Броня",
+                btn_call_to_order_2: "Поръчай Модел Onyx по Телефона",
+                craft_subtitle: "Тествано в Шампионски Битки",
+                craft_title: "СЪЗДАДЕНО ОТ ШАМПИОНИ",
+                feat1_title: "Тествано от Шампиони",
+                feat1_desc: "Основано от активни BJJ шампиони, които знаят какво издържа на 3-часови ежедневни тренировки.",
+                feat2_title: "Тройно Подсилено",
+                feat2_desc: "Критичните зони под мишниците и реверите са тройно зашити срещу скъсване при силен натиск.",
+                feat3_title: "EVA Пяна в Ревера",
+                feat3_desc: "Бързосъхнеща антибактериална EVA пяна в ревера, която затруднява хващането от съперника.",
+                sales_subtitle: "Директен Телефон за Поръчки",
+                sales_title: "ОБАДЕТЕ СЕ ЗА ДИРЕКТНА ПОРЪЧКА",
+                sales_desc: "Свържете се директно с нашия екип, за да проверите размерите в реално време, отстъпки за клубове или да направите бърза поръчка.",
+                sales_line_1: "Основен Телефон за Продажби",
+                sales_line_2: "Viber / WhatsApp Поръчки",
+                sales_hours: "Пон - Съб: 09:00 - 19:00 (EET)",
+                footer_copy: "© 2026 VALOR & VORTEX BJJ Equipment Co. Създадено от BJJ Шампиони."
+            }
+        };
+
+        let currentLang = 'en';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.getElementById('current-lang-code').innerText = lang.toUpperCase();
+            
+            // Hide selection modal
+            const modal = document.getElementById('language-modal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => modal.classList.add('hidden'), 500);
+
+            // Update all text nodes with data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerText = translations[lang][key];
+                }
+            });
+        }
+
+        function toggleLanguage() {
+            const nextLang = currentLang === 'en' ? 'bg' : 'en';
+            setLanguage(nextLang);
+        }
+    </script>
+</body>
+</html>
